@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>장바구니</title>
+		<meta charset="utf-8">
+		<!--<link rel="stylesheet" type="text/css" href="cart.css">-->
+		
+		<style>
+			#cart_item {
+				height: 200px;
+				border: 1px solid black;
+			}
+			
+			#cart_item_check {
+				height: 100%;
+    			/*vertical-align: middle;*/
+				display: inline-block;
+			}
+			
+			#cart_item_photo {
+			    width: 200px;
+			    height: 200px;
+			    background-size: 100% 100%;
+			    display: inline-block;
+			}
+			
+			#cart_item_info {
+				height: 200px;	
+				vertical-align: top;
+				display: inline-block;
+			    margin-left: 17px;
+			    margin-top: 73px;
+			}
+			
+			#cart_item_edit {
+				height: 200px;	
+				vertical-align: top;
+				display: inline-block;
+			    margin-left: 17px;
+			    margin-top: 86px;
+			}
+			
+			#order_num_input {
+				width: 71px;
+				margin: 4px;	
+			}
+			
+			#update_btn, #delete_btn {
+				margin: 2px;
+			}
+			
+		</style>
+	</head>
+	<body>
+	
+		<div id="head_wrap">
+			<h3>장바구니</h3>
+			<div id="process_wrap">
+				<ol class="cart_process">
+					<li class="process_cart"><span id="process_now">장바구니</span></li>
+					<li class="process_order">주문/결제</li>
+					<li class="process_end">주문완료</li>
+				</ol>
+			</div>
+		</div>
+		
+		<div id="list_caption">
+			<p>상품 선택 및 확인</p>
+		</div>
+		
+		<div id="list_wrap"	>
+			<div id="list_wrap_table">
+			</div>
+			
+			<div id="list_total_price">
+				<input type="button" value="총 합계 계산" onClick="how_much()"> <span id="total_price">0</span> 원
+			</div>
+			
+			<div id="list_wrap_button">
+				<input type="checkbox" name="check_all" onClick="check_all();"> 상품 전체 선택
+				<!--<input type="button" value="삭제하기" onClick="delete_item();" />-->
+				
+				<!--<a href="FlowerMall_order.html">-->
+					<input type="button" value="선택 상품 주문하기" onClick="order_put();">
+				<!--</a>-->
+			</div>
+		</div>
+		
+		<script type="text/javascript" src="js/main.js"></script>
+		
+	</body>
+</html>

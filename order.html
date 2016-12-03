@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>주문/결제</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="cart.css">
+</head>
+<body>
+
+<div id="head_wrap">
+	<h3>주문/결제</h3>
+	<div id="process_wrap">
+		<ol class="cart_process">
+			<li class="process_cart">장바구니</li>
+			<li class="process_order"><span id="process_now">주문/결제</span></li>
+			<li class="process_end">주문완료</li>
+		</ol>
+	</div>
+</div>
+
+<div id="list_caption">
+	<p>주문 상품 확인</p>
+</div>
+
+<div id="list_wrap"	>
+	<div id="list_wrap_table">
+		<table border="0">
+			<tr height="70px">
+				<td rowspan="3" width="33px">
+				</td>
+				<td class="talign_c" rowspan="3" width="150px">
+					<span id="product_image">이미지 미리보기</span>
+				</td>
+				<td class="veralign_t" width="400px">
+					<span class="cart product" id="product_name">애플민트 수국</span>
+				</td>
+				<td rowspan="3" class="talign_r" id="product_total" width="250px">
+					총 금액
+				</td>
+			</tr>
+			<tr height="15px">
+				<!-- 병합된 부분 -->
+				<!-- 병합된 부분 -->
+				<td>
+					<span class="cart product" id="product_number">수량 [ 재고 수량 ]</span>
+				</td>
+				<!-- 병합은 아니지만 비워놓음 -->
+			</tr>
+			<tr height="15px">
+				<!-- 병합된 부분 -->
+				<!-- 병합된 부분 -->
+				<td>
+					<span class="cart product" id="procuct_price">가격</span>
+				</td>
+				<!-- 병합된 부분 -->
+			</tr>
+		</table>
+	</div>
+</div>
+
+<div id="order_caption">
+	<p>배송지 정보 입력</p>
+</div>
+
+<div id="order_wrap">
+	<table>
+		<tr>
+			<td width="150px">받으시는 분</td> <td><span id="order_name">가입 당시 고객 이름</span></td>
+		</tr>
+		<tr>
+			<td>주소</td> <td><span id="order_address">가입 당시 주소</span></td>
+		</tr>
+		<tr>
+			<td>휴대전화</td> <td><span id="order_phone">가입 당시 휴대전화번호</span></td>
+		</tr>
+		<tr>
+			<td>배송시 요구사항</td>
+			<td>
+				<input type="text" size="50" list="memos">
+				<datalist id="memos">
+					<option value="배송 전 연락바랍니다." />
+					<option value="부재시 핸드폰으로 연락바랍니다." />
+					<option value="부재시 경비실에 맡겨주세요." />
+					<option value="택배함에 넣어주세요." />
+					<option value="파손 위험이 있는 상품이니 조심히 다뤄주세요." />
+				</datalist>
+			</td>
+		</tr>
+
+	</table>
+</div>
+
+<div id="pay_caption">
+	<p>결제 정보 입력</p>
+</div>
+
+<div id="pay_wrap">
+	<div id="div_radio01">
+		<input id="radio01" type="radio" name="radioBox" value="cash" checked="checked" />
+		<label for="radio01">무통장 입금 <span id="span_mileage">(마일리지 2% 적립)</span></label>
+		<article class="accordian_cash">
+			<p>입금 계좌 : 국민은행 90000000000 (예금주 : 플라워몰)</p>
+			<p>
+				- 주문 후 5 영업일 이내 입금 확인이 되지 않으면 주문이 자동취소 될 수 있습니다.
+				<br>
+				- 입금 시 주문자 이름과 입금자명이 일치해야 확인됩니다.
+				<br>
+				- 해외은행 계좌에서 입금 시에는 반드시 원화로 입금하셔야 합니다.
+				<br>
+				- 취소/반품 신청 시 환불 수단을 무통장으로 환불 받으실 수 있습니다.
+			</p>
+		</article>
+	</div>
+
+	<div id="div_radio02">
+		<input id="radio02" type="radio" name="radioBox" value="credit" />
+		<label for="radio02">신용 카드 <span id="span_mileage">(마일리지 1% 적립)</span></label>
+		<article class="accordian_credit">
+			<p>카드사 선택 :
+				<select size="1">
+					<option>국민</option>
+					<option>신한(구 조흥)</option>
+					<option>우리</option>
+					<option>하나</option>
+				</select>
+			</p>
+			<p>카드 번호 : 
+				<input type="text" size="2"/> - <input type="password" size="2" placeholder="****" /> - <input type="password" size="2" placeholder="****"/> - <input type="text" size="2"/>
+			</p>
+			<p>카드 만료일(월/년) : 
+				<input type="number" min="1" max="12" step="1" value="1">
+				<input type="number" min="2016" max="2022" step="1" value="2016">
+			</p>
+			<p>CVC 번호 : 
+				<input type="number" min="111" max="999" step="1">
+			</p>
+			<p>카드 비밀번호 앞 두 자리 : 
+				<input type="password" size="1">**
+			</p>
+
+		</article>
+	</div>
+</div>
+
+<div id="pay_button">
+	<input type="button" value="결제하기">	
+</div>
+</body>
+</html>

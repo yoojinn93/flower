@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Main</title>
+	<meta charset="utf-8">
+
+	<style type="text/css">
+
+		* {
+			font-size: 12px;
+		}
+
+		#section_login {
+			float: left;
+			margin-bottom: 50px;
+		}
+
+		#section_products {
+			clear: left;
+		}
+
+		table {
+			float: left;
+			clear: none;
+			margin: 0 5px;
+			padding: 5px 0;
+			width: 150px;
+		}
+
+		.product {
+			line-height: 1px;
+			text-align: center;
+		}
+
+		#product_quantity {
+			width: 50px;
+		}
+
+		#section_addItem {
+			clear: left;
+		}
+		
+		a {
+			display: block;
+			text-decoration: none;
+		}
+
+	</style>
+
+</head>
+<body onload='loadInfo();'>
+
+<div id="section_login">
+
+	<form>
+		<input type="text" id="login_ID" placeholder="ID">
+		<br>
+		<input type="password" id="login_PW" placeholder="********">
+	</form>
+</div>
+
+<button onclick="window.localStorage.clear();">스토리지 초기화 (새로고침하면 상품DB만 남아요)</button>
+<p id="myPage"><a href="#">마이 페이지</a></p>
+
+<div id="section_products">
+
+	<div id="section_list" class="product list">
+	</div>
+
+	<script type="text/javascript">
+		var localStorage = window.localStorage;
+		var items = [];
+
+		items[0] = [];
+			items[0][0] = "장미";
+			items[0][1] = "25000";
+			items[0][2] = "20";
+			items[0][3] = "image_source/flower.jpg";
+		items[1] = [];
+			items[1][0] = "수국";
+			items[1][1] = "15000";
+			items[1][2] = "4";
+			items[1][3] = "image_source/flower.jpg";
+		items[2] = [];
+			items[2][0] = "수국2";
+			items[2][1] = "150000";
+			items[2][2] = "4";
+			items[2][3] = "image_source/flower.jpg";
+		items[3] = [];
+			items[3][0] = "크리스마스 로즈";
+			items[3][1] = "25000";
+			items[3][2] = "20";
+			items[3][3] = "image_source/flower.jpg";
+		items[4] = [];
+			items[4][0] = "장미쓰";
+			items[4][1] = "25000";
+			items[4][2] = "20";
+			items[4][3] = "image_source/flower.jpg";
+		items[5] = [];
+			items[5][0] = "빨간장미";
+			items[5][1] = "25000";
+			items[5][2] = "20";
+			items[5][3] = "image_source/flower.jpg";
+
+		localStorage.setItem("items", JSON.stringify(items));
+		var items_db = JSON.parse(localStorage.getItem("items"));
+		localStorage.setItem("cart",JSON.stringify([]));
+		function loadInfo() {
+			for (var i =0; i < items.length; i++)
+				{
+					var item = document.createElement("table");
+					item.id = "item_"+i;
+					document.getElementById("section_list").appendChild(item);
+
+					var tr01 = document.createElement("tr");
+					document.getElementById("item_"+i).appendChild(tr01);
+
+					var td01 = document.createElement("td");
+					td01.class = "product image";
+					td01.setAttribute("colspan", "2");
+					tr01.appendChild(td01);
+
+					td01.innerHTML = '<img id="product_image" src = "' + items[i][3] +'" width="150px" height="150px">';
+
+					var tr02 = document.createElement("tr");
+					document.getElementById("item_"+i).appendChild(tr02);
+
+					var td02 = document.createElement("td");
+					td02.class = "product name";
+					td02.setAttribute("colspan", "2");
+					tr02.appendChild(td02);
+
+					td02.innerHTML = '<p id="product_name">' + items[i][0] +'</p>';
+
+					var tr03 = document.createElement("tr");
+					document.getElementById("item_"+i).appendChild(tr03);
+
+					var td03 = document.createElement("td");
+					td03.class = "product price";
+					td03.setAttribute("colspan", "2");
+					tr03.appendChild(td03);
+
+					td03.innerHTML = '<p id="product_price">' + items[i][1] +' 원</p>';
+
+					var tr04 = document.createElement("tr");
+					document.getElementById("item_"+i).appendChild(tr04);
+
+					var td04 = document.createElement("td");
+					td04.class = "product storage";
+					td04.setAttribute("colspan", "2");
+					tr04.appendChild(td04);
+
+					td04.innerHTML = '<p id="product_image">' + items[i][2] +' set</p>';
+
+					var tr05 = document.createElement("tr");
+					document.getElementById("item_"+i).appendChild(tr05);
+
+					var td05_1 = document.createElement("td");
+					td05_1.innerHTML = '<input id="product_quantity'+i+'" type="number" step="1" min="1" max = "" value="1">';
+					tr05.appendChild(td05_1);
+
+					var td05_2 = document.createElement("td");
+					td05_2.innerHTML = '<button onclick="add_cart('+i+')">장바구니 담기</button>';
+					tr05.appendChild(td05_2);
+                    
+                    document.getElementById("product_quantity"+i).max = items[i][2];
+				}
+		}
+        function add_cart(product_id){
+            
+            var product_quantity = parseInt(document.getElementById("product_quantity"+product_id).value);
+            if(product_quantity>items[product_id][2]){
+                window.alert("한도 수량을 초과하셨습니다.");
+                return;
+            }
+            else{
+            cart = JSON.parse(localStorage.getItem("cart"));
+            cart[product_id] = [];
+            cart[product_id][0] = product_id;
+            cart[product_id][1] = product_quantity;    
+            localStorage.setItem("cart",JSON.stringify(cart));
+            }
+        }
+	</script>
+
+</div>
+
+<div id="section_addItem">
+	<a href="#"><button>상품 추가하기</button></a>
+</div>
+
+
+</body>
+</html>

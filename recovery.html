@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <title>메인</title>
+    </head>
+    <body>
+        <h3>비밀번호 찾기</h3>
+        <form id="recovery_form" action="login_ok.php" method="post">
+            <input type="text" name="name" placeholder="가입시 입력한 이름">
+            <input type="text" name="hp" placeholder="가입시 입력한 전화번호">
+            <input type="submit" value="찾기">
+        </form>
+        <a href="./index.html">메인으로</a>
+        <script>
+            var form = document.forms['recovery_form'];
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                var user_list = JSON.parse(localStorage.getItem('user_list'));
+                user_list = user_list.filter(function(obj) {
+                    return obj[2] == form.name.value;
+                });
+                console.log(user_list);
+                if(form.name.value == user_list[0].name && form.hp.value == user_list[0][3]) {
+                    alert('가입시 입력한 비밀번호는\n' + user_list[0][1] + '\n입니다.');
+                } else {
+                    alert('일치하는 정보가 없습니다.');
+                }
+            }, false);
+        </script>
+    </body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <title>회원가입</title>
+    </head>
+    <body>
+        <form id="register_form" method="post">
+            <input type="text" name="id" placeholder="Username">
+            <input type="password" name="pw" placeholder="Password">
+            <input type="password" name="pw2" placeholder="Confirm Password">
+            <input type="text" name="name" placeholder="Name">
+            <input type="text" name="hp" placeholder="Telephone">
+            <input type="submit" value="Register">
+        </form>
+        <a class="register" href="./index.html">메인으로</a>
+        <script>
+            var form = document.forms['register_form'];
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                if(form.id.value == '') alert('ID입력란이 비어있습니다.');
+                else if(form.pw.value == '') alert('PW입력란이 비어있습니다.');
+                else if(form.pw.value != form.pw2.value) alert('비밀번호 입력이 다릅니다.');
+                else if(form.hp.value == '') alert('핸드폰 번호 입력란이 비어있습니다.');
+                else if(form.name.value == '') alert('이름란이 비어있습니다.');
+               
+                else {
+                    var user_list = JSON.parse(localStorage.getItem('user_list'));
+                    if(user_list == null) user_list = [];
+                    console.log(user_list);
+                    var user_info = [
+                        form.id.value,
+                        form.pw.value,
+                        form.name.value,
+                        form.hp.value,
+                   
+                    ];
+                    user_list.push(user_info);
+                    localStorage.setItem('user_list', JSON.stringify(user_list));
+                    alert('정상적으로 회원가입이 되었습니다. 메인페이지에서 로그인해주세요.');
+                    location.replace('./index.html');
+                }
+            }, false);
+        </script>
+    </body>
+</html>

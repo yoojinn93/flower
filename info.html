@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <title>메인</title>
+        <script>
+            function setCookie(k, v, ex) {
+                var d = new Date();
+                d.setTime(d.getTime() + (ex * 24 * 60 * 60 * 1000));
+                var expires = 'expires=' + d.toUTCString();
+                document.cookie = k + '=' + v + ';' + expires + ';path=/';
+            }
+            function getCookie(cname) {
+                var name = cname + "=";
+                var ca = document.cookie.split(';');
+                for(var i = 0; i < ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0) == ' ') {
+                        c = c.substring(1);
+                    }
+                    if (c.indexOf(name) == 0) {
+                        return c.substring(name.length, c.length);
+                    }
+                }
+                return "";
+            }
+            var loginState = getCookie('loginState');
+            if(loginState == 0) {
+                alert('권한이 없습니다.');
+                location.replace('./index.html');
+            }
+        </script>
+    </head>
+    <body>
+        <div id="member_info">
+            <h3>회원정보</h3>
+            <p id="mb_name">이름: </p>
+            <p id="mb_id">아이디: </p>
+            <p id="mb_pw">비밀번호: </p>
+            <p id="mb_hp">핸드폰번호: </p>
+            <p id="mb_mile">마일리지: </p>
+        </div>
+        <script>
+            var user_list = JSON.parse(localStorage.getItem('user_list')).filter(function(obj) {
+                return obj[0] == loginState;
+            });
+            document.getElementById('mb_name').innerHTML = '이름: ' + user_list[0][2];
+            document.getElementById('mb_id').innerHTML = '아이디: ' + user_list[0][0];
+            document.getElementById('mb_pw').innerHTML = '비밀번호: ' + user_list[0][1];
+            document.getElementById('mb_hp').innerHTML = '핸드폰번호: ' + user_list[0][3];
+            document.getElementById('mb_mile').innerHTML = '마일리지: ' + user_list[0][4];
+        </script>
+    </body>
+</html>

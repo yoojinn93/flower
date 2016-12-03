@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+<meta charset="utf-8">
+<script type="text/javascript">
+    
+        function fnLogin(){
+            var id = document.getElementById("id");
+            var pw = document.getElementById("pw");
+            
+            if(id.value == ""){                 //아이디나 비밀번호 칸이 비어있는지만 확인.. 로그인/아웃 function은 추가해줘야됩니다.
+                alert("아이디를 입력하세요..!!");
+                id.focus();
+                return ;
+            }
+            else if(pw.value == ""){
+                alert("비밀번호를 입력하세요..!!");
+                pw.focus();
+                return ;
+            }
+            
+            
+            document.getElementById("areaLogin").style.display = "none";
+            
+            var Loginfo = document.getElementById("loginInfo");
+            Loginfo.innerHTML = "관리자님 환영합니다"; //이 부분은 DB에 있는 데이터를 불러오는 방식으로 바꿔야 합니다.
+            
+            document.getElementById("areaLogout").style.display = "";
+        }    
+        
+        
+        
+        function fnLogout(){
+            document.getElementById("id").value = "";  //id, pw 값 초기화
+            document.getElementById("pw").value = "";
+            
+            document.getElementById("areaLogin").style.display = "";
+            document.getElementById("areaLogout").style.display = "none";
+        }
+
+</script>
+<body>
+<table id="areaLogin">
+        <tr><td><input type="text" id="id" placeholder="username"></td></tr>
+        <tr><td><input type="password" id="pw" placeholder="password"></td></tr>
+        <tr><td colspan=2><input type="button" value="로그인" onclick=fnLogin()></td></tr>
+</table>
+    
+<table id="areaLogout" style="display:none;">
+        <tr>
+            <td><div id="loginInfo"></div></td>
+        </tr>
+        <tr><td><input type="button" value="로그아웃" onclick="fnLogout()"></td></tr>
+</table>
+</body>
+</html>

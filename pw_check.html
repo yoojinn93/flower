@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+<title>비밀번호 찾기</title>
+<meta charset="utf-8">
+<script type = "text/javascript">
+var localStorage = window.localStorage;
+     	    
+//user db
+var users = [];
+//아이디, 비번, 마일리지 순    
+users[0] = [];
+users[0][0] = "ugenie";
+users[0][1] = "25";
+users[0][2] = "3300";
+users[1]=[];
+users[1][0] = "abc";
+users[1][1] = "123";
+users[1][2] = "3300";
+            
+localStorage.setItem("users", JSON.stringify(users));
+var users_db = JSON.parse(localStorage.getItem("users"));
+
+function CheckId(){
+	var id = document.getElementById("id");
+	var IsID = false;
+	var cnt=-1;
+	for(var i=0;i<users_db.length;i++){
+		if(users_db[i][0]==id.value){
+			IsID=true;
+			cnt = i;
+		}
+	}
+	if(!IsID){
+		alert("존재하지 않는 회원입니다.");
+		window.location.replace("login.html")
+		return;
+	}
+	else{
+		alert(users_db[cnt][0]+"님의 비밀번호는"+users_db[cnt][1]+"입니다.");
+		window.location.replace("login.html")
+	}
+}
+
+</script>
+<body>
+	<div class="login">
+	<h1>Login</h1>
+    <form>
+    	<input type="text" id="id" placeholder="Username" required="required"/><br/>
+        <button type="button" class = "Signup" onclick="CheckId()">Check</button>
+    </form>
+</div>
+</body>
+
+</html>
