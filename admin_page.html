@@ -1,0 +1,150 @@
+<!Doctype html>
+<title>관리자페이지</title>
+<meta charset="utf-8"/>
+<style = "text/css">
+#header{
+	position:relative;
+	margin: 0 0 0 0;
+	padding: 5px 5px 5px 5px;
+	border-bottom-color:#c3c3c3;
+	width: 100%;
+	margin-left: 230px;
+	height: 5%;
+	background-color: green;
+	
+	}
+#header a:hover{
+	color:#999;
+	}
+#header li{
+	list-style-position: inside;
+	list-style-type:none;
+	display: inline;
+	position: relative;
+	letter-spacing: 10px;
+	text-align: center;
+	font-size: 30px;
+	margin-right: 40px;
+	
+	}
+#header ul{
+		
+	}
+#article{
+	position: relative;
+	display:block;
+	margin: 30px 0 0 230px;
+	width: 100%;
+	height: 60%;
+	
+	}
+#aside{
+	position:relative;
+	margin: 30px 0 0 0;
+	width: 20%;
+	height: 60%;
+	float:left;
+	background-color: brown;
+	text-align: center;
+}
+	}
+#footer{
+	display: block;
+	position: relative;
+	margin-top: 30px;
+	text-align:center;
+	width: 100%;
+	background-color: #959595;
+	}
+ul{
+	display:inline;
+	
+	}
+.link{
+	text-decoration: none;
+	color: white;
+}
+.title{
+	float:left;
+	padding-top: 5px;
+	background-color: blue;
+	width: 20%;
+	height: 20%;
+	font-size: 30px;
+	text-align: center;
+}
+#log_in{
+	display:block;
+	position:relative;
+	width: 80%;
+	margin: 5px 5px 5px 5px;
+	border: thin solid black;
+}
+body{
+	margin: 5% 0 0 5%;
+	width: 1000px;
+	height: 1000px;
+}
+
+</style>
+
+<body>
+<script type = "text/javascript">
+	var localStorage = window.localStorage;
+	var members_db = JSON.parse(localStorage.getItem("members"));
+	
+	if(!members_db[0][8]){                                 //관리자 계정으로 로그인 하지 않고 접근 시도시 접근 차단
+		alert("권한이 없습니다.");
+		window.location.replace("Main.html");
+	}
+</script>
+</script>
+<h1> <span class= "title"><a class="link" href="admin_page.html">2조 쇼핑몰</a></span></h1>
+	<div id = "header">
+		<ul>
+			<li><a class="link" href="acc_control.html" target = "page">계정 관리</a></li>
+			<li><a class="link" href="product_control.html" target = "page">상품 관리</a></li>
+			<li><a class="link" href="mileage_control.html" target = "page" >마일리지 관리</a></li>
+			<li><a class="link" href="user_control.html" target = "page">회원 관리</a></li>
+		</ul>
+	</div>
+	<div id = "aside">
+	
+    <table id="areaLogout">
+        <tr>
+            <td><div id="loginInfo">
+				<p></p>
+			</div></td>
+        </tr>
+        <tr><td><input type="button" value="로그아웃" onclick="fnLogout()"></td></tr>
+    </table>
+     
+
+	</div>
+	<div id = "article">
+	<iframe src = "" name= "page" id="page_id" width="100%" height = "100%" frameborder = "0" framespacing=0 marginheight=0 marginwidth=0 scrolling=no vspace=0></iframe>
+	</div>
+<script type="text/javascript">
+		var localStorage = window.localStorage;
+		var members_db = JSON.parse(localStorage.getItem("members"));
+       
+        var Loginfo = document.getElementById("loginInfo");
+        Loginfo.innerHTML = "<p>" + members_db[1][2] +"님 환영합니다</p>";
+			
+        function fnLogout(){
+           	members_db[0][8]=false;
+           	members_db[0][7]=false;
+			localStorage.setItem("members", JSON.stringify(members_db));
+			alert("로그아웃 되셨습니다");
+			window.location.replace("Main.html");
+			
+        }
+
+</script>
+</body>
+<footer>
+	<div id = "footer">
+	Copyright (c) 2016 SKKU WebProgramming Group 2. All rights reserved.
+	</div>
+</footer>
+</html>

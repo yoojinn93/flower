@@ -53,60 +53,44 @@
 <div id="section_login">
 
 	<form>
-		<input type="text" id="login_ID" placeholder="ID">
+		<table id = "areaLogin">
+			<tr>
+				<td colspan=2><button type = "button" id= "login" onclick="goLogin()">로그인</button></td>
+			</tr>
+		</table>
+		<table id = "areaLogout" style="display:none;">
+			<tr>
+            <td><div id="loginInfo"></div></td>
+        	</tr>
+        	<tr>
+        	<td><button type = "button" id= "logout" onclick="goLogout()">로그아웃</button></td>
+        	</tr>
+		</table>
+		<!--<input type="text" id="login_ID" placeholder="ID">
 		<br>
-		<input type="password" id="login_PW" placeholder="********">
+		<input type="password" id="login_PW" placeholder="********">-->
 	</form>
 </div>
 
-<button onclick="window.localStorage.clear();">스토리지 초기화 (새로고침하면 상품DB만 남아요)</button>
-<p id="myPage"><a href="#">마이 페이지</a></p>
+<!--<button onclick="window.localStorage.clear();">스토리지 초기화 (새로고침하면 상품DB만 남아요)</button>-->
+<p id="myPage"><a href="MyPage.html">마이 페이지</a></p>
+<p id="toCart"><a href="cart.html">장바구니</a></p>
 
 <div id="section_products">
 
 	<div id="section_list" class="product list">
 	</div>
 
+	
 	<script type="text/javascript">
 		var localStorage = window.localStorage;
-		var items = [];
-
-		items[0] = [];
-			items[0][0] = "장미";
-			items[0][1] = "25000";
-			items[0][2] = "20";
-			items[0][3] = "image_source/flower.jpg";
-		items[1] = [];
-			items[1][0] = "수국";
-			items[1][1] = "15000";
-			items[1][2] = "4";
-			items[1][3] = "image_source/flower.jpg";
-		items[2] = [];
-			items[2][0] = "수국2";
-			items[2][1] = "150000";
-			items[2][2] = "4";
-			items[2][3] = "image_source/flower.jpg";
-		items[3] = [];
-			items[3][0] = "크리스마스 로즈";
-			items[3][1] = "25000";
-			items[3][2] = "20";
-			items[3][3] = "image_source/flower.jpg";
-		items[4] = [];
-			items[4][0] = "장미쓰";
-			items[4][1] = "25000";
-			items[4][2] = "20";
-			items[4][3] = "image_source/flower.jpg";
-		items[5] = [];
-			items[5][0] = "빨간장미";
-			items[5][1] = "25000";
-			items[5][2] = "20";
-			items[5][3] = "image_source/flower.jpg";
-
-		localStorage.setItem("items", JSON.stringify(items));
+		
 		var items_db = JSON.parse(localStorage.getItem("items"));
-		localStorage.setItem("cart",JSON.stringify([]));
+		var members_db = JSON.parse(localStorage.getItem("members"));  //로그인 용 회원 DB소환
+		var cart = new Array(items_db.length);
+		var cnt = -1; //로그인 db 참조 변수
 		function loadInfo() {
-			for (var i =0; i < items.length; i++)
+			for (var i =0; i < items_db.length; i++)
 				{
 					var item = document.createElement("table");
 					item.id = "item_"+i;
@@ -120,7 +104,7 @@
 					td01.setAttribute("colspan", "2");
 					tr01.appendChild(td01);
 
-					td01.innerHTML = '<img id="product_image" src = "' + items[i][3] +'" width="150px" height="150px">';
+					td01.innerHTML = '<img id="product_image" src = "' + items_db[i][3] +'" width="150px" height="150px">';
 
 					var tr02 = document.createElement("tr");
 					document.getElementById("item_"+i).appendChild(tr02);
@@ -130,7 +114,7 @@
 					td02.setAttribute("colspan", "2");
 					tr02.appendChild(td02);
 
-					td02.innerHTML = '<p id="product_name">' + items[i][0] +'</p>';
+					td02.innerHTML = '<p id="product_name">' + items_db[i][0] +'</p>';
 
 					var tr03 = document.createElement("tr");
 					document.getElementById("item_"+i).appendChild(tr03);
@@ -140,7 +124,7 @@
 					td03.setAttribute("colspan", "2");
 					tr03.appendChild(td03);
 
-					td03.innerHTML = '<p id="product_price">' + items[i][1] +' 원</p>';
+					td03.innerHTML = '<p id="product_price">' + items_db[i][1] +' 원</p>';
 
 					var tr04 = document.createElement("tr");
 					document.getElementById("item_"+i).appendChild(tr04);
@@ -150,7 +134,7 @@
 					td04.setAttribute("colspan", "2");
 					tr04.appendChild(td04);
 
-					td04.innerHTML = '<p id="product_image">' + items[i][2] +' set</p>';
+					td04.innerHTML = '<p id="product_image">' + items_db[i][2] +' set</p>';
 
 					var tr05 = document.createElement("tr");
 					document.getElementById("item_"+i).appendChild(tr05);
@@ -163,32 +147,59 @@
 					td05_2.innerHTML = '<button onclick="add_cart('+i+')">장바구니 담기</button>';
 					tr05.appendChild(td05_2);
                     
-                    document.getElementById("product_quantity"+i).max = items[i][2];
+                    document.getElementById("product_quantity"+i).max = items_db[i][2];
 				}
 		}
         function add_cart(product_id){
             
             var product_quantity = parseInt(document.getElementById("product_quantity"+product_id).value);
-            if(product_quantity>items[product_id][2]){
+            if(product_quantity>items_db[product_id][2]){
                 window.alert("한도 수량을 초과하셨습니다.");
                 return;
             }
             else{
-            cart = JSON.parse(localStorage.getItem("cart"));
+            
             cart[product_id] = [];
             cart[product_id][0] = product_id;
             cart[product_id][1] = product_quantity;    
-            localStorage.setItem("cart",JSON.stringify(cart));
+            localStorage.setItem("cart",JSON.stringify(cart));//확인용 스토리지 추후 삭제.
+	    	members_db[0][6] = cart; // member[0] 에 저장
+        	localStorage.setItem("members", JSON.stringify(members_db)); //members 갱신
             }
+        }// localStorage 'cart'에 장바구니 품목, 수량 값 저장합니다.
+        for(var i = 0; i<members_db.length; i++){
+        	if(members_db[i][7]){
+        		cnt=i;
+        		document.getElementById("areaLogin").style.display = "none";
+    			var Loginfo = document.getElementById("loginInfo");
+        		Loginfo.innerHTML = members_db[i][2]+"님 환영합니다"; 
+        		document.getElementById("areaLogout").style.display = "";
+        		break;
+        	}
         }
+        function goLogin(){
+        	window.location.replace("login.html"); //login 페이지로 이동
+        }
+       
+        function goLogout(){
+            document.getElementById("areaLogin").style.display = "";
+            document.getElementById("areaLogout").style.display = "none";
+            members_db[cnt][7]=false;
+            localStorage.setItem("members", JSON.stringify(members_db));
+            alert("로그아웃 되셨습니다");
+            window.location.reload();
+        }
+        
+
 	</script>
 
 </div>
 
+<!-- 관리자 모드에서 상품 추가 가능하므로 주석처리합니다 -제균
 <div id="section_addItem">
 	<a href="#"><button>상품 추가하기</button></a>
 </div>
-
+-->
 
 </body>
 </html>

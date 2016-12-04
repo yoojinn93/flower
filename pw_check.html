@@ -1,31 +1,58 @@
 <!DOCTYPE HTML>
 <html>
-<title>비밀번호 찾기</title>
-<meta charset="utf-8">
+<head>
+	<title>비밀번호 찾기</title>
+	<meta charset="utf-8">
+	<style>
+		.login{
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			margin: -150px 0 0 -150px;
+			width:300px;
+			height:300px;
+		}
+		input{
+			width: 90%;
+			margin-left: 5px;
+			margin-bottom: 10px;
+			padding: 10px;
+			border: rgba(0,0,0,0.3) 1px solid;
+			border-radius: 4px;
+			outline: none;
+			font-size: 13px;
+			box-shadow: inset 0 -5px 45px rgba(100,100,100,0.2), 0 1px 1px rgba(255,255,255,0.2);
+			font-family: 'Batang';
+		}
+		h1{
+			text-align: center;
+			font-family: 'Batang che';
+		}
+		button{
+			margin: 5px 0 0 15px;
+			font-family: 'Malgun Gothic';
+		}
+	</style>
+</head>
+
+<body>
+<div class="login">
+	<h1>비밀번호 찾기</h1>
+    <form>
+    	<input type="text" id="id" placeholder="아이디를 입력해주세요" required="required"/><br/>
+        <button type="button" class = "Signup" onclick="CheckId()">비밀번호 찾기</button>
+    </form>
+</div>
 <script type = "text/javascript">
 var localStorage = window.localStorage;
-     	    
-//user db
-var users = [];
-//아이디, 비번, 마일리지 순    
-users[0] = [];
-users[0][0] = "ugenie";
-users[0][1] = "25";
-users[0][2] = "3300";
-users[1]=[];
-users[1][0] = "abc";
-users[1][1] = "123";
-users[1][2] = "3300";
-            
-localStorage.setItem("users", JSON.stringify(users));
-var users_db = JSON.parse(localStorage.getItem("users"));
+var members_db = JSON.parse(localStorage.getItem("members"));
 
 function CheckId(){
 	var id = document.getElementById("id");
 	var IsID = false;
 	var cnt=-1;
-	for(var i=0;i<users_db.length;i++){
-		if(users_db[i][0]==id.value){
+	for(var i=0;i<members_db.length;i++){
+		if(members_db[i][0]==id.value){
 			IsID=true;
 			cnt = i;
 		}
@@ -36,20 +63,12 @@ function CheckId(){
 		return;
 	}
 	else{
-		alert(users_db[cnt][0]+"님의 비밀번호는"+users_db[cnt][1]+"입니다.");
+		alert(members_db[cnt][0]+"님의 비밀번호는"+members_db[cnt][1]+"입니다.");
 		window.location.replace("login.html")
 	}
 }
 
 </script>
-<body>
-	<div class="login">
-	<h1>Login</h1>
-    <form>
-    	<input type="text" id="id" placeholder="Username" required="required"/><br/>
-        <button type="button" class = "Signup" onclick="CheckId()">Check</button>
-    </form>
-</div>
 </body>
 
 </html>

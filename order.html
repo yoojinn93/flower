@@ -3,7 +3,7 @@
 <head>
 	<title>주문/결제</title>
 	<meta charset="utf-8">
-	<link rel="stylesheet" type="text/css" href="cart.css">
+	<link rel="stylesheet" type="text/css" href="css/order.css">
 </head>
 <body>
 
@@ -13,7 +13,6 @@
 		<ol class="cart_process">
 			<li class="process_cart">장바구니</li>
 			<li class="process_order"><span id="process_now">주문/결제</span></li>
-			<li class="process_end">주문완료</li>
 		</ol>
 	</div>
 </div>
@@ -21,41 +20,14 @@
 <div id="list_caption">
 	<p>주문 상품 확인</p>
 </div>
-
+    
 <div id="list_wrap"	>
 	<div id="list_wrap_table">
-		<table border="0">
-			<tr height="70px">
-				<td rowspan="3" width="33px">
-				</td>
-				<td class="talign_c" rowspan="3" width="150px">
-					<span id="product_image">이미지 미리보기</span>
-				</td>
-				<td class="veralign_t" width="400px">
-					<span class="cart product" id="product_name">애플민트 수국</span>
-				</td>
-				<td rowspan="3" class="talign_r" id="product_total" width="250px">
-					총 금액
-				</td>
-			</tr>
-			<tr height="15px">
-				<!-- 병합된 부분 -->
-				<!-- 병합된 부분 -->
-				<td>
-					<span class="cart product" id="product_number">수량 [ 재고 수량 ]</span>
-				</td>
-				<!-- 병합은 아니지만 비워놓음 -->
-			</tr>
-			<tr height="15px">
-				<!-- 병합된 부분 -->
-				<!-- 병합된 부분 -->
-				<td>
-					<span class="cart product" id="procuct_price">가격</span>
-				</td>
-				<!-- 병합된 부분 -->
-			</tr>
-		</table>
 	</div>
+</div>
+
+<div id="price_caption">
+    <p>최종 결제 금액 <span id="total_price">여기에 첫번째</span></p>
 </div>
 
 <div id="order_caption">
@@ -66,6 +38,9 @@
 	<table>
 		<tr>
 			<td width="150px">받으시는 분</td> <td><span id="order_name">가입 당시 고객 이름</span></td>
+		</tr>
+		<tr>
+			<td>보유 마일리지</td> <td><span id="order_mileage">적립 마일리지</span></td>
 		</tr>
 		<tr>
 			<td>주소</td> <td><span id="order_address">가입 당시 주소</span></td>
@@ -97,7 +72,7 @@
 <div id="pay_wrap">
 	<div id="div_radio01">
 		<input id="radio01" type="radio" name="radioBox" value="cash" checked="checked" />
-		<label for="radio01">무통장 입금 <span id="span_mileage">(마일리지 2% 적립)</span></label>
+		<label for="radio01">무통장 입금 <span id="span_mileage_cash"></span></label>
 		<article class="accordian_cash">
 			<p>입금 계좌 : 국민은행 90000000000 (예금주 : 플라워몰)</p>
 			<p>
@@ -114,7 +89,7 @@
 
 	<div id="div_radio02">
 		<input id="radio02" type="radio" name="radioBox" value="credit" />
-		<label for="radio02">신용 카드 <span id="span_mileage">(마일리지 1% 적립)</span></label>
+		<label for="radio02">신용 카드 <span id="span_mileage_card"></span></label>
 		<article class="accordian_credit">
 			<p>카드사 선택 :
 				<select size="1">
@@ -143,7 +118,10 @@
 </div>
 
 <div id="pay_button">
-	<input type="button" value="결제하기">	
+	<input type="button" value="결제하기" onclick="order_finish();">
 </div>
+    
+<script type="text/javascript" src="js/order.js"></script>
+    
 </body>
 </html>

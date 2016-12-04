@@ -1,0 +1,105 @@
+* {font-size: 15px;}
+
+/*
+	각종 정렬 클래스
+*/
+.veralign_t {vertical-align: top;}
+.veralign_b {vertical-align: bottom;}
+.talign_r {text-align: right;}
+.talign_c {text-align:center;}
+
+/*
+	장바구니 진행 현황 나타내는 부분
+*/
+
+#head_wrap {border: solid 1px #777; overflow-y: auto;}
+
+.cart_process li {
+	list-style-type : none;
+	float: left;
+	vertical-align: middle;
+	text-align: center;
+	position: relative;
+
+	margin-right: 1.5em;
+}
+
+#process_wrap {float: right;}
+
+#process_now {color: red; font-weight: bolder;}
+
+h3 {
+	text-align: left;
+	float: left;
+	margin-left: 1.5em;
+}
+
+/*
+	장바구니 내 담긴 물품 출력하는 부분
+*/
+#list_caption {border: solid 1px #777; overflow-y: auto;}
+#list_caption p {font-size: 0.8em;}
+#list_wrap_table {border: solid 1px #777; overflow-y: auto; height: auto;}
+
+.product {font-size: 0.8em;}
+#product_remove {color: #555;}
+
+/*
+	최종 결제 금액 표시
+*/
+#price_caption {border: solid 1px #777; overflow-y: auto;}
+#price_caption p {font-size: 0.8em; text-align: right; margin-right: 10%;}
+#total_price {padding-left: 2em; font-size: 1.5em;}
+
+/*
+	주문 배송지 입력
+*/
+#order_caption {border: solid 1px #777;}
+#order_caption p {font-size: 0.8em;}
+#order_wrap {border: solid 1px #777; padding-left: 33px;}
+
+/*
+	결제 정보 입력
+*/
+#pay_caption {border: solid 1px #777;}
+#pay_caption p {font-size: 0.8em;}
+#pay_wrap {border: solid 1px #777; overflow-y: auto;}
+
+#div_radio01 {
+	float: left;
+	width: 50%;
+	height: 250px;
+	padding-right: 1em;
+}
+
+#order_item {
+    overflow-y: auto;
+    border: solid 1px cyan;
+    margin-top: 2.5px;
+    margin-bottom: 2.5px;
+}
+
+#order_item_photo {
+    width: 150px;
+    height: 150px;
+    background-size: 100% 100%;
+    vertical-align: middle;
+    margin-left: 10%;
+    float: left;
+}
+
+#order_item_info {
+    float: right;
+    width: auto;
+    text-align: right;
+    margin-right: 10%;
+    margin-top: 20px;
+    vertical-align: middle;
+}
+
+#flowerName {font-size: 1.2em;}
+#flowerPnQ {font-size: 0.8em;}
+#flowerLSum {color:deeppink; margin-top: -1em;}
+
+#span_mileage_cash {font-size: 0.75em; color: red;}
+#span_mileage_card {font-size: 0.75em; color: red;}

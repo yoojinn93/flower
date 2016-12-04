@@ -1,15 +1,103 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>DB설정페이지</title>
-		<meta charset="utf-8">
-	</head>
-	
-	<body>
-		<div>
-			<button onclick="window.localStorage.clear();">로컬 스토리지 초기화 (버튼 누르시고 새로고침 하세요)</button>
-		</div>
-		
-		<script type="text/javascript" src="js/main.js"></script> <!--script 분리했습니다-->
-	</body>
+<head>
+	<title>DB설정페이지</title>
+	<meta charset="utf-8">
+</head>
+<body>
+<div>
+
+<button onclick="window.localStorage.clear();">로컬 스토리지 초기화 (버튼 누르시고 새로고침 하세요)</button>
+
+<script type="text/javascript">
+		var localStorage = window.localStorage;
+
+		//여기서부터 회원 DB
+
+		var members = [];
+
+		members[0] = [];
+			members[0][0] = "client"; //ID
+			members[0][1] = "client"; //비밀번호
+			members[0][2] = "고객"; //이름
+			members[0][3] = "010-1111-1111"; //전화번호
+			members[0][4] = "경영관"; //주소
+			members[0][5] = 0; //마일리지
+			members[0][6] = [[0,2], [1,1], [3,10]]; //장바구니
+			members[0][7] = false; //로그인 여부
+			members[0][8] = false; //관리자 권한 확인
+
+			//혹시 몰라서 장바구니 채워놨어요
+
+		members[1] = [];
+			members[0][0] = "admin"; //ID
+			members[0][1] = "admin"; //비밀번호
+			members[0][2] = "관리자"; //이름
+			members[0][3] = "010-1111-1111"; //전화번호
+			members[0][4] = "교수회관"; //주소
+			members[0][5] = 0; //마일리지
+			members[0][6] = []; //장바구니
+			members[0][7] = false; //로그인 여부
+			members[0][8] = true; //관리자 권한 확인
+
+
+		localStorage.setItem("members", JSON.stringify(members));
+		var members_db = JSON.parse(localStorage.getItem("members"));
+
+		//여기서부터 상품 DB
+
+		var items = [];
+
+		items[0] = [];	
+			items[0][0] = "장미";
+			items[0][1] = "25000";
+			items[0][2] = "20";
+			items[0][3] = "image_source/flower.jpg";
+
+		items[1] = [];
+			items[1][0] = "수국";
+			items[1][1] = "15000";
+			items[1][2] = "4";
+			items[1][3] = "image_source/flower.jpg";
+
+		items[2] = [];
+			items[2][0] = "수국2";
+			items[2][1] = "150000";
+			items[2][2] = "4";
+			items[2][3] = "image_source/flower.jpg";
+
+		items[3] = [];
+			items[3][0] = "크리스마스 로즈";
+			items[3][1] = "25000";
+			items[3][2] = "20";
+			items[3][3] = "image_source/flower.jpg";
+
+		items[4] = [];
+			items[4][0] = "장미쓰";
+			items[4][1] = "25000";
+			items[4][2] = "20";
+			items[4][3] = "image_source/flower.jpg";
+
+		items[5] = [];
+			items[5][0] = "빨간장미";
+			items[5][1] = "25000";
+			items[5][2] = "20";
+			items[5][3] = "image_source/flower.jpg";
+
+
+		localStorage.setItem("items", JSON.stringify(items));
+		var items_db = JSON.parse(localStorage.getItem("items"));
+
+		//여기서부터 주문 DB (공용)
+
+		var orders = [];
+
+		//비어있어용
+
+		localStorage.setItem("orders", JSON.stringify(orders));
+		var orders_db = JSON.parse(localStorage.getItem("orders"));
+
+</script>
+</div>
+</body>
 </html>
