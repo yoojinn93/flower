@@ -7,14 +7,7 @@ var items_db = JSON.parse(localStorage.getItem("items"));
 
 var order_db = JSON.parse(localStorage.getItem("order"));
 
-//로그인 한 회원의 넘버 체크
-var logined = -1;
-for(var i = 0; i<members_db.length; i++) {
-    if(members_db[i][7]) {
-        logined = i;
-        break;
-    }
-}
+var logined = localStorage.getItem("current_user_id");
 
 
 //주문할 상품 보여주기
@@ -58,17 +51,46 @@ function order_sum() {
 function order_finish() {
     var mileage;
     if (document.getElementById("radio01").checked) mileage = final_price*0.02
-    else mileage = final_price*0.02;
+    else mileage = final_price*0.01;
         
     var answer = confirm("총 "+ final_price + "원이 결제되며, " + mileage + "점이 마일리지로 적립됩니다..\n진행하시겠습니까?");
-    if (answer) alert("주문이 완료되었습니다.");
     
-    members_db[logined][5] += mileage;
-    localStorage.setItem("members", JSON.stringify(members_db));
-    members_db = JSON.parse(localStorage.getItem("members"));
+    if (answer) {
+        alert("주문이 완료되었습니다.");
+        members_db[logined][5] += mileage;
+        localStorage.setItem("members", JSON.stringify(members_db));
+        members_db = JSON.parse(localStorage.getItem("members"));
+        removeCart();
+        
+        location.href = "Main.html";
+    }
     
-    location.href = "Main.html";
-    alert("총 적립된 마일리지 " + members_db[logined][5] + "점");
+}
+
+function removeCart() {
+	if (members_db[logined][6].length != order_db.length) {
+		var cart_left = [];
+		for (var i = 0; i < members_db[logined][6].length; i++) {
+			var cnt = 0;
+			var left = 0;
+			for (var j = 0; j<order_db.length; j++) {
+				if (members_db[logined][6][i][0] != order_db[j][0]) {
+					cnt++;
+				}
+			}
+			if (cnt == order_db.length) {
+				cart_left[left] = members_db[logined][6][i];
+				left++;
+			}   
+		}
+	}
+	else { members_db[logined][6] = []; }
+	order_db = [];
+	members_db[logined][6] = cart_left;
+
+	localStorage.setItem("order",JSON.stringify(order_db));
+	localStorage.setItem("members", JSON.stringify(members_db));
+
 }
 
 document.getElementById("order_name").innerHTML = members_db[logined][2];

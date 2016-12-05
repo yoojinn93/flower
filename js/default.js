@@ -80,3 +80,4 @@ items[5] = [];
 localStorage.setItem("items", JSON.stringify(items));
 var items_db = JSON.parse(localStorage.getItem("items"));
 
+localStorage.setItem("current_user_id","");

@@ -114,6 +114,7 @@ function Onlogin(){
 		}
 		else{
 			alert("로그인 성공");
+			check_current_user();
 			window.location.replace("Main.html");
 		}
 	}
@@ -121,6 +122,18 @@ function Onlogin(){
 		alert("로그인 실패");
 	}
 }
+
+function check_current_user() {
+
+	for (var i=1; i<members_db.length; i++) {
+		if (members_db[i][7]==true) {
+			localStorage.setItem("current_user_id", i);
+			break;
+		}
+		else localStorage.setItem("current_user_id", "");
+	}
+}
+
 
 </script>
 </body>

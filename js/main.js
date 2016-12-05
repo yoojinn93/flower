@@ -12,7 +12,7 @@ var members_db = JSON.parse(localStorage.getItem("members"));
 
 
 /// Indent 되어 있는 부분은 main.html에서 로컬스토리지 선언 부분을 빼고 모두 복사해온 것들입니다
-	var cart = new Array(items_db.length);
+	var cart = new Array();
 	var cnt = -1; //로그인 db 참조 변수
 	function loadInfo() {
 		for (var i =0; i < items_db.length; i++)
@@ -83,9 +83,24 @@ var members_db = JSON.parse(localStorage.getItem("members"));
 	        return;
 	    }
 	    else{
-	    cart[product_id] = [];
-	    cart[product_id][0] = product_id;
-	    cart[product_id][1] = product_quantity;    
+	    var case1 = true;
+	    var product = [product_id,product_quantity];
+        	if(cart.length == 0){
+                cart.push(product);
+                case1 = false;
+            }
+            else{
+            	for(var i=0;i<cart.length;i++){
+                	if(cart[i][0] == product[0]){
+                	cart.splice(i,1,product);
+                	case1 = false;
+                	break;
+                	}
+        		}
+            }
+            if(case1 == true){
+                cart.push(product);
+            }
 	    localStorage.setItem("cart",JSON.stringify(cart));//확인용 스토리지 추후 삭제.
 	    members_db[current_user_id][6] = cart;
         localStorage.setItem("members", JSON.stringify(members_db)); 
@@ -111,25 +126,27 @@ var members_db = JSON.parse(localStorage.getItem("members"));
 	    document.getElementById("areaLogout").style.display = "none";
 	    members_db[cnt][7]=false;
 	    localStorage.setItem("members", JSON.stringify(members_db));
+		check_current_user();
 	    alert("로그아웃 되셨습니다");
 	    window.location.reload();
 	}
         
 /// Indent 종료
 
+var current_user_id = localStorage.getItem("current_user_id");
+
 ////current user check start////
 function check_current_user() {
-	// localStorage.setItem("current_user_id", ""); // 추후 로그아웃 시 초기화 필요
-	
+
 	for (var i=1; i<members_db.length; i++) {
-		if (members_db[i][7] == true) {
-			localStorage.setItem("current_user_id", i);  
+		if (members_db[i][7]) {
+			localStorage.setItem("current_user_id", i);
+			break;
 		}
+		else localStorage.setItem("current_user_id", "");
 	}
 }
 
-check_current_user()
-var current_user_id = localStorage.getItem("current_user_id"); 
 ////current user check end////
 
 

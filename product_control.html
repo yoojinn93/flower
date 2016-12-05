@@ -171,12 +171,57 @@ function changeQuantity(product_id){
 		window.location.replace("product_control.html"); //새로고침
 	}
 }
+function add_product(){
+	var localStorage = window.localStorage;
+	var get_name = prompt("추가할 상품의 이름을 적어주세요");
+	var get_price = prompt("추가할 상품의 가격을 적어주세요");
+	var get_numset = prompt("추가할 상품의 수량을 적어주세요");
+	var get_img = prompt("추가할 상품의 이미지를 적어주세요");
+	
+	if(get_name==null){
+		alert("상품 명이 입력되지 않았습니다.");
+		return;
+	}else if(get_price==null||get_price<=0){
+		alert("상품 가격이 올바르지 않습니다.");
+		return;
+	}else if(get_numset==null||get_numset<0){
+		alert("상품의 수량이 올바르지 않습니다.");
+		return;
+	}else if(get_img==null){
+		alert("상품 이미지를 확인해주세요");
+		return;
+	}else{
+		var items_db = JSON.parse(localStorage.getItem("items"));
+		var len = items_db.length;
+		items_db[len] = [];
+		items_db[len][0] = get_name;
+		items_db[len][1] = get_price;
+		items_db[len][2] = get_numset;
+		items_db[len][3] = get_img;
+		localStorage.setItem("items", JSON.stringify(items_db));
+		alert("성공적으로 상품이 추가되었습니다");
+		window.location.reload();
+	}
+}
+function remove_product(){
+	var localStorage = window.localStorage;
+	var items_db = JSON.parse(localStorage.getItem("items"));
+	var get_name = prompt("제거할 상품의 이름을 적어주세요");
+	for(var i = 0; i<items_db.length; i++){
+		if(get_name==items_db[i][0]){
+			items_db.splice(i,1);
+			break;
+		}
+	}
+	localStorage.setItem("items", JSON.stringify(items_db));
+}
 	</script>
 
 </div>
 
 <div id="section_addItem">
-	<a href="#"><button>상품 추가하기</button></a>
+	<button onclick = "add_product()">상품 추가하기</button>
+	<button onclick = "remove_product()">상품 제거하기</button>
 </div>
 
 

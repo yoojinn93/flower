@@ -44,7 +44,7 @@ function show_cart() {
         var checkbox = document.createElement("input");
         checkbox.type = "checkbox";
         checkbox.name = "check_item";
-        checkbox.id = "cart_item_check";
+        checkbox.id = "cart_item_check"+i;
         checkbox.checked = "checked"
         checkbox.className = item_id; //order db에 item index 넣어주기 위해 classname을 item index로 지정
         cart_item_check.appendChild(checkbox);
@@ -58,8 +58,9 @@ function show_cart() {
         
         //item info div
         var cart_item_info = document.createElement("div");;
-        cart_item_info.id = "cart_item_info";
-        
+        cart_item_info.id = "cart_item_info"+i;
+        cart_item_info.className = "cart_item_info";
+        cart_item_info.value = items_db[item_id][1];
         cart_item_info.appendChild(document.createTextNode(items_db[item_id][0])); //item name
         cart_item_info.appendChild(document.createElement("br"));
         
@@ -90,9 +91,12 @@ function check_all() {
 // var sum = 0;
 function how_much() {
 	var sum = 0;
-	for (var i=0; i<members_db[0][6].length; i++) {
-		var item_id = members_db[0][6][i][0];
-        sum += parseInt(items_db[item_id][1]) * parseInt(document.getElementById("order_num_input"+i).value);
+	var item_price = 0; 
+	for (var i=0; i<members_db[current_user_id][6].length; i++) {
+	    if (document.getElementById("cart_item_check"+i).checked == true){
+	        item_price = document.getElementById("cart_item_info"+i).value;
+	        sum += parseInt(item_price) * parseInt(document.getElementById("order_num_input"+i).value);
+	    }
     }
     document.getElementById("total_price").innerHTML = sum;
 }
@@ -117,7 +121,8 @@ function order_put() {
 			order.push([parseInt(checks[i].className), parseInt(item_stock)]); //[실제 order한 item index, 수량]
 		};
 	}
-    localStorage.setItem("order", JSON.stringify(order)); 
+    localStorage.setItem("order", JSON.stringify(order));
+    location.href = "order.html";
 
 }
 ////order end////
