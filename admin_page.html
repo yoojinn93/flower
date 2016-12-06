@@ -52,9 +52,10 @@
 	display: block;
 	position: relative;
 	margin-top: 30px;
+	margin-left: 30px;
 	text-align:center;
 	width: 100%;
-	background-color: #959595;
+	background-color: black;
 	}
 ul{
 	display:inline;
@@ -86,6 +87,7 @@ body{
 	height: 1000px;
 }
 
+
 </style>
 
 <body>
@@ -98,7 +100,7 @@ body{
 		window.location.replace("Main.html");
 	}
 </script>
-</script>
+
 <h1> <span class= "title"><a class="link" href="admin_page.html">2조 쇼핑몰</a></span></h1>
 	<div id = "header">
 		<ul>
@@ -122,24 +124,9 @@ body{
 
 	</div>
 	<div id = "article">
-	<iframe src = "" name= "page" id="page_id" width="100%" height = "100%" frameborder = "0" framespacing=0 marginheight=0 marginwidth=0 scrolling=no vspace=0></iframe>
+	<iframe src = "" name= "page" id="page_id" width="100%" height = "100%" frameborder = "0" framespacing=0 marginheight=0 marginwidth=0 vspace=0></iframe>
 	</div>
-<script type="text/javascript">
-		var localStorage = window.localStorage;
-		var members_db = JSON.parse(localStorage.getItem("members"));
-       
-        var Loginfo = document.getElementById("loginInfo");
-        Loginfo.innerHTML = "<p>" + members_db[0][2] +"님 환영합니다</p>";
-			
-        function fnLogout(){
-           	members_db[0][8]=false;
-           	members_db[0][7]=false;
-			localStorage.setItem("members", JSON.stringify(members_db));
-			alert("로그아웃 되셨습니다");
-			window.location.replace("Main.html");
-			
-        }
-
+<script type="text/javascript"src="js/admin.js">	
 </script>
 </body>
 <footer>

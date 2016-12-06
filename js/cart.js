@@ -13,11 +13,16 @@ var members_db = JSON.parse(localStorage.getItem("members"));
 ////current user check start////
 function check_current_user() {
 	// localStorage.setItem("current_user_id", ""); // 추후 로그아웃 시 초기화 필요
-	
+	var cnt = -1;
 	for (var i=1; i<members_db.length; i++) {
 		if (members_db[i][7] == true) {
-			localStorage.setItem("current_user_id", i);  
+			localStorage.setItem("current_user_id", i);
+			cnt=i;
 		}
+	}
+	if(cnt==-1){
+		window.location.replace("login.html");
+		alert("로그인이 필요합니다");
 	}
 }
 
@@ -45,7 +50,7 @@ function show_cart() {
         checkbox.type = "checkbox";
         checkbox.name = "check_item";
         checkbox.id = "cart_item_check"+i;
-        checkbox.checked = "checked"
+        checkbox.checked = "checked";
         checkbox.className = item_id; //order db에 item index 넣어주기 위해 classname을 item index로 지정
         cart_item_check.appendChild(checkbox);
         cart_item.appendChild(cart_item_check);
@@ -71,19 +76,51 @@ function show_cart() {
         order_num.value = members_db[current_user_id][6][i][1];
         order_num.id = "order_num_input" + i;
         cart_item_info.appendChild(order_num);
-        cart_item_info.appendChild(document.createTextNode("개"));
+        cart_item_info.appendChild(document.createTextNode(" set "));
+        
+        var btn = document.createElement("span");
+        btn.innerHTML = '<button onclick="change_cart('+i+', '+item_id+')">변경</button>';
+        cart_item_info.appendChild(btn);
+        
         cart_item_info.appendChild(document.createElement("br"));
         
-        cart_item_info.appendChild(document.createTextNode("재고 " + items_db[item_id][2] + "개")); //item stock
+        cart_item_info.appendChild(document.createTextNode("재고 " + items_db[item_id][2] + " set")); //item stock
         cart_item.appendChild(cart_item_info);
   }
 }
 
+function change_cart(i, item_id) {
+    var change_num = parseInt(document.getElementById("order_num_input"+i).value);
+    if(change_num > items_db[item_id][2]){
+        window.alert("한도 수량을 초과하셨습니다.");
+        return;
+    }
+    else if(change_num <= 0) {
+        window.alert("최소 수량은 1개 입니다!");
+        return;
+    }
+    else {
+        window.alert("변경되었습니다!");
+        return;
+    }
+}
+
 //장바구니 상품 전체 체크
+var isChecked = true;
 function check_all() {
 	var checks = document.getElementsByName('check_item');
-	for(var i=0; i<checks.length; i++) {
-		checks[i].checked = true;
+	
+	if(isChecked === true) {
+    	for(var i=0; i<checks.length; i++) {
+    		checks[i].checked = false;
+    	}
+    	isChecked = false;
+	}
+	else {
+	    for(var i=0; i<checks.length; i++) {
+    		checks[i].checked = true;
+    	}
+    	isChecked = true;
 	}
 }   
 
@@ -114,15 +151,42 @@ function order_put() {
     
 	var checks = document.getElementsByName('check_item'); //모든 checkbox 가져오기
 	
+	
+	//전체 주문 수량이 유효한지 검사하기 위한 값 넘기기
+	var valid = 1;
 	for (var i=0; i<checks.length; i++) {
 		if (checks[i].checked == true) { //check된 경우만
-			var item_stock = document.getElementById("order_num_input"+i).value;
-			// if (order == null) order = [];
-			order.push([parseInt(checks[i].className), parseInt(item_stock)]); //[실제 order한 item index, 수량]
+		    valid = valid * document.getElementById("order_num_input"+i).value;
 		};
 	}
-    localStorage.setItem("order", JSON.stringify(order));
-    location.href = "order.html";
+	
+	//주문수량 유효 검사
+	if (valid > 0) {
+        for (var i=0; i<checks.length; i++) {
+    		if (checks[i].checked == true) { //check된 경우만
+    			var item_stock = document.getElementById("order_num_input"+i).value;
+    			order.push([parseInt(checks[i].className), parseInt(item_stock)]); //[실제 order한 item index, 수량]
+    		};
+    	}
+        localStorage.setItem("order", JSON.stringify(order));
+        
+        //유효한 경우, 선택된 상품이 있는지 검사
+        if (order.length === 0) {
+            alert('선택된 상품이 없습니다!');
+        }
+        else {
+            window.location.href = "order.html";
+        }
+	}
+	else {
+	    alert("최소 주문 수량은 1개입니다!");
+	}
+	
+	
+    
+    // location.href = "order.html";
+    
+    
 
 }
 ////order end////

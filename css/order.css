@@ -12,7 +12,7 @@
 	장바구니 진행 현황 나타내는 부분
 */
 
-#head_wrap {border: solid 1px #777; overflow-y: auto;}
+#head_wrap {border: solid 1px #777; background-color: #373839; color: white; overflow-y: auto;}
 
 .cart_process li {
 	list-style-type : none;
@@ -20,13 +20,13 @@
 	vertical-align: middle;
 	text-align: center;
 	position: relative;
-
+	color: #222;
 	margin-right: 1.5em;
 }
 
 #process_wrap {float: right;}
 
-#process_now {color: red; font-weight: bolder;}
+#process_now {color: white; font-weight: bolder;}
 
 h3 {
 	text-align: left;

@@ -1,0 +1,133 @@
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+* {
+	font-size: 12px;
+	font-family : 'Nanum Gothic', sans-serif;
+}
+
+#section_products {
+	clear: left;
+	margin-top: 20px;
+	margin-left: 12%;
+	margin-right: 7%;
+}
+
+table {
+	border : 1px solid #EEE;
+	float: left;
+	clear: none;
+	margin: 10px 15px;
+	width: 150px;
+	padding-bottom : 8px;
+}
+
+#product_name {
+	line-height: 1em;
+	font-size : 1.6em;
+	text-align : left;
+	text-indent : 1em;
+}
+
+#product_price {
+	text-align : right;
+	padding-right : 1em;
+	font-size : 1.4em;
+	color : #373839;
+}
+
+#product_storage {
+	text-align : right;
+	padding-right : 1em;
+	font-size : 0.9em;
+	color : red;
+}
+
+tr {
+	vertical-align : middle;
+	height : 10px;
+}
+
+input {
+	width : 150px;
+	height : 2.5em;
+	text-align : right;
+}
+
+button {
+	display : block;
+	width : 150px;
+	height : 3em;
+	background-color : #373839;
+	color : white;
+	border : none;
+	cursor : pointer;
+}
+
+button:hover {
+	background-color : #575859;
+	transition : background-color, 0.5s;
+}
+
+.product {
+	line-height: 1px;
+	text-align: center;
+}
+
+#product_quantity {
+	width: 50px;
+}
+
+#UpSide {
+	height: 500px;
+	width: 100%;
+	text-align: center;
+	margin-top : -10px;
+	background-color : #222;
+	background-image: url(../img/Background_small.jpg);
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+
+a {
+	margin : 15px 20px 10px 3px;
+	float: left;
+	width: 100px;
+	padding: 15px 0 15px 0;
+	color: #fff;
+	border: 1px solid #fff;
+	text-align: center;
+	outline: none;
+	text-decoration: none;
+	cursor : pointer;
+}
+
+a:hover {
+	background-color: white;
+	color: #222;
+	transition: background-color 1s, color 1s;
+}
+
+#section_login {
+	position: absolute;
+	margin-left : 30px;
+	margin-top: 15px;
+	overflow-y: auto;
+	width : 350px;
+	left: 5%;
+}
+
+#loginInfo {
+	float: left;
+	text-align: left;
+	color : white;
+	font-size: 1.2em;
+	margin-top: 25px;
+	width: 150px;
+}
+
+#section_etc {
+	position: absolute;
+	overflow-y : auto;
+	width : 250px;
+	margin-left: 80%;
+}

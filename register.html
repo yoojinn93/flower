@@ -3,48 +3,22 @@
     <head>
         <meta charset="utf-8">
         <title>회원가입</title>
-        <style>
-        #left{
-			display: block;
-			float: left;
-			width:200px;
-			margin: 0 0 0 0;
-			text-align: right;
-			}
-		#right{
-			display: block;
-			float: right;
-			width: 50%;
-			text-align: left;
-			}
-		#center{
-			display:block;
-			margin: 30px 0 0 0;
-			text-align:center;
-			}
-		.red{
-			color: red;
-		}
-		body{
-		    width:800px;
-		    margin: 10% 0 0 25%;
-		}
-		fieldset{
-		    width: 800px;
-		}
-        </style>
+        <link rel="stylesheet" type="text/css" href="css/register.css">
     </head>
     <body>
-        <form>    
+    	
+	<div id="UpSide"></div>
+    	
+    <form>    
       <fieldset>
-				<legend>회원 정보</legend>
+				<legend>회원 가입</legend>
 				<div id="left">
-			    	<p>아이디&nbsp;&nbsp;</p>
-			    	<p>비밀번호<span class="red">*</span></p>
-			    	<p>비밀번호 확인<span class="red">*</span></p>
-				    <p>이름</p>
-				    <p>핸드폰 번호</p>
-				    <p>주소</p>
+			    	<p>아이디&nbsp;&nbsp;<span class="red">*</span></p>
+			    	<p>비밀번호&nbsp;&nbsp;<span class="red">*</span></p>
+			    	<p>비밀번호 확인&nbsp;&nbsp;<span class="red">*</span></p>
+				    <p>이름&nbsp;&nbsp;<span class="red">*</span></p>
+				    <p>핸드폰 번호&nbsp;&nbsp;<span class="red">*</span></p>
+				    <p>주소&nbsp;&nbsp;<span class="red">*</span></p>
 				</div>
 				<div id="right">
 				    <p><strong><input type = "text" id = "get_id" placeholder = "아이디를 적어주세요" /></strong></p>
@@ -52,91 +26,19 @@
 				    <p><strong><input type = "password" id = "pw2" placeholder = "****" /></strong></p>
 				    <p><strong><input type = "text" id = "name" placeholder= "이름을 적어주세요" /></strong></p>
 				    <p><strong><input type = "tel" id = "telephone" placeholder = "000-0000-0000" pattern = "[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}" />
-				    <p><strong><input type = "text" id = "address" placeholder = "주소를 적어주세요"/></strong></p>
+				    <p><strong><input type = "text" id = "address" onkeypress="if(event.keyCode==13) {save_change();}" placeholder = "주소를 적어주세요"/></strong></p>
 				</div>
 			</fieldset>
 			
 			<div id="center">
-			<input type = "button" value = "가입하기" onclick = "save_change()"/>
-			<input type = "button" value = "취소" onclick = "pageload()" />
+			<input type = "button" class="button register" value = "가입하기" onclick = "save_change()"/>
+			<input type = "button" class="button cancel" value = "취소" onclick = "pageload()" />
 			</div>
     </form> 
-        <!--<form id="register_form" method="post">
-            <input type="text" name="ID" placeholder="Username">
-            <input type="password" name="비밀번호" placeholder="Password">
-            <input type="password" name="비밀번호확인2" placeholder="Confirm Password">
-            <input type="text" name="이름" placeholder="Name">
-            <input type="text" name="전화번호" placeholder="Telephone">
-            <button id = "submit" value="Register">저장</button>
-        </form>-->
-        <!--<script>
-            var form = document.forms['register_form'];
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                if(form.ID.value == '') alert('ID입력란이 비어있습니다.');
-                else if(form.비밀번호.value == '') alert('PW입력란이 비어있습니다.');
-                else if(form.비밀번호.value != form.pw2.value) alert('비밀번호 입력이 다릅니다.');
-                else if(form.전화번호.value == '') alert('핸드폰 번호 입력란이 비어있습니다.');
-                else if(form.이름.value == '') alert('이름란이 비어있습니다.');
-               
-                else {
-                    var members = JSON.parse(localStorage.getItem('members'));
-                    if(members == null) 
-                    //요기 수정했어요..
-                    members[0]=[ ];
-                    console.log(members);
-                    var members[0][0] = form.ID.value
-                    var members[0][1] = form.비밀번호.value
-                    var members[0][2] = form.이름.value
-                    var members[0][3] = form.전화번호.value
-                    var members[0][4] = form.주소.value
-                    
-                    //요기까지..
-                    members.push(user_info);  // 얘를 어떻게 할지 모르겠네요..
-                    localStorage.setItem('members', JSON.stringify(members));
-                    alert('정상적으로 회원가입이 되었습니다. 메인페이지에서 로그인해주세요.');
-                    location.replace('./index.html');
-                }
-            }, false);
-        </script>-->
-        
-        <script type = "text/javascript">
        
-        var localStorage = window.localStorage;
-        var members_db = JSON.parse(localStorage.getItem("members"));
-	    var get_id = document.getElementById("get_id");            //아이디
-	    var pw_change_1 = document.getElementById("pw1");          //비밀번호 1
-		var pw_change_2 = document.getElementById("pw2");          //비밀번호 2
-		var name_change = document.getElementById("name");         //이름
-		var tel_change = document.getElementById("telephone");     //전화번호
-		var my_address = document.getElementById("address");       //주소
-		var cnt = members_db.length;
-				
-		function save_change(){
-		    if(pw_change_1.value!=pw_change_2.value){
-		        alert("입력하신 비밀번호가 서로 같지 않습니다.");
-		        return;
-		    }
-		    else{
-		        members_db[cnt]=[];
-		        members_db[cnt][0] = get_id.value;
-		        members_db[cnt][1] = pw_change_1.value;
-		        members_db[cnt][2] = name_change.value;
-		        members_db[cnt][3] = tel_change.value;
-		        members_db[cnt][4] = my_address.value;
-		        members_db[cnt][5] = 0;
-		        members_db[cnt][6] = [];
-		        members_db[cnt][7] = false;
-		        members_db[cnt][8] = false;
-		    }
-		    localStorage.setItem("members", JSON.stringify(members_db));
-		    alert("정상적으로 회원가입 되었습니다.");
-			pageload();
-		}
-		
-		function pageload(){
-			window.location.replace("login.html"); // 로그인 화면으로 돌아가기
-		}
+        <script type = "text/javascript" src = "js/register.js">
+       
+        
 	</script>
     </body>
 </html>

@@ -1,70 +1,7 @@
-<!DOCTYPE html>
-<html lang="ko">
-    <head>
-        <meta charset="utf-8">
-        <title>메인</title>
-    </head>
-    <body>
-        <button onclick="localStorage.clear();">Clear LocalStorage</button>
-        <form id="login_form" action="login_ok.php" method="post">
-            <input type="text" name="id" placeholder="Username">
-            <input type="password" name="pw" placeholder="Password">
-            <input type="submit" value="Login"><br>
-            <a class="register" href="./register.html">회원가입</a>
-        </form>
-        <div id="logged">로그인됨 <a href="./info.html">정보보기</a> <a class="logout" href="#">로그아웃</a></div>
-        <script>
-            function setCookie(k, v, ex) {
-                var d = new Date();
-                d.setTime(d.getTime() + (ex * 24 * 60 * 60 * 1000));
-                var expires = 'expires=' + d.toUTCString();
-                document.cookie = k + '=' + v + ';' + expires + ';path=/';
-            }
-            function getCookie(cname) {
-                var name = cname + "=";
-                var ca = document.cookie.split(';');
-                for(var i = 0; i < ca.length; i++) {
-                    var c = ca[i];
-                    while (c.charAt(0) == ' ') {
-                        c = c.substring(1);
-                    }
-                    if (c.indexOf(name) == 0) {
-                        return c.substring(name.length, c.length);
-                    }
-                }
-                return "";
-            }
-            var loginState = getCookie('loginState');
-            if(loginState != 0) {
-                document.getElementById('login_form').style.display = 'none';
-                document.getElementById('logged').style.display = 'block';
-            } else {
-                document.getElementById('login_form').style.display = 'block';
-                document.getElementById('logged').style.display = 'none';
-            }
-            var form = document.forms['login_form'];
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                var user_list = JSON.parse(localStorage.getItem('user_list')).filter(function(obj) {
-                    return obj[0] == form.id.value;
-                });
-                if(form.id.value == '') alert('ID를 입력해주세요');
-                else if(form.pw.value == '') alert('비밀번호를 입력해주세요');
-                else if(user_list[0][0] == form.id.value && user_list[0][0] == form.pw.value) {
-                    setCookie('loginState', form.id.value, 10);
-                    location.replace('./index.html');
-                } else if(user_list[0][0] == form.id.value && user_list[0][0] != form.pw.value) {
-                    if(confirm('비밀번호를 잃어버리셨나요?')) location.href = './recovery.html';
-                    else return;
-                } else {
-                    alert('가입되지 않은 회원입니다. 계정정보를 확인해주세요');
-                }
-            }, false);
-            document.getElementsByClassName('logout')[0].addEventListener('click', function(e) {
-                e.preventDefault();
-                setCookie('loginState', 0);
-                location.replace('./index.html');
-            }, false);
-        </script>
-    </body>
-</html>
+<!--<meta charset="utf-8" http-equiv="refresh" content="0; url=/Main.html" />-->
+<meta charset="utf-8"/>
+
+<script type="text/javascript" src="js/default.js"></script>
+<script>
+    window.open("Main.html",'_self');
+</script>

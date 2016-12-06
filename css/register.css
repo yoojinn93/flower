@@ -1,0 +1,67 @@
+﻿#UpSide {
+			height: 400px;
+			width: 100%;
+			text-align: center;
+			margin-top : -10px;
+			background-color : #222;
+			background-image: url(../img/Background_small.jpg);
+			background-position: center center;
+			background-repeat: no-repeat;
+		}
+
+        #left{
+			display: block;
+			float: left;
+			width:200px;
+			margin: 0 0 0 0;
+			text-align: right;
+			}
+		#right{
+			display: block;
+			float: right;
+			width: 50%;
+			text-align: left;
+			}
+		#center{
+			position: absolute;
+			top: 780px;
+		    left: 50%;
+		    transform : translateX(-50%);
+			text-align:center;
+			}
+		.red{
+			color: red;
+		}
+		fieldset{
+		    width: 800px;
+		    position : absolute;
+		    top : 450px;
+		    left: 50%;
+		    transform : translateX(-50%);
+		}
+		
+		.button {
+			width : 150px;
+			height : 3em;
+			color : white;
+			border : none;
+			cursor : pointer;
+		}
+
+		.register {
+			background-color : #1E90FF;
+		}
+		
+		.register:hover {
+			background-color : #3EC0FF;
+			transition : background-color, 0.5s;
+		}
+		
+		.cancel {
+			background-color : #373839;
+		}
+		
+		.cancel:hover {
+			background-color : #575859;
+			transition : background-color, 0.5s;
+		}

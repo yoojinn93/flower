@@ -2,139 +2,21 @@
 <html>
 <title>로그인</title>
 <meta charset="utf-8">
-<style type = "text/css">
-.login { 
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	margin: -150px 0 0 -150px;
-	width:300px;
-	height:300px;
-}
-.login h1 { letter-spacing:1px; text-align:center; }
-.Signup {
-	width: 100px;
-	cursor: pointer;
-}
-.link {
-  text-decoration: none;
-  color: #959595;
-  float: right;
-  font-size: 12px;
-  margin-bottom: 15px;
-}
-.link:hover {
-  text-decoration: underline;
-  color: #8C918F;
-}
-.register {
-  text-decoration: none;
-  color: #959595;
-  font-size: 12px;
-  margin-bottom: 15px;
-}
-.register:hover {
-  text-decoration: underline;
-  color: #8C918F;
-}
-input { 
-	width: 100%; 
-	margin-bottom: 10px; 
-	background: white;
-	outline: none;
-	padding: 10px;
-	font-size: 13px;
-	text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
-	border: 1px solid rgba(0,0,0,0.3);
-	border-radius: 4px;
-	box-shadow: inset 0 -5px 45px rgba(100,100,100,0.2), 0 1px 1px rgba(255,255,255,0.2);
-	
-}
-input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgba(255,255,255,0.2); }
-</style>
-
+<link rel="stylesheet" type="text/css" href="css/login.css">
 <body>
+
+<div id="UpSide"></div>
 
   <div class="login">
 	<h1>로그인</h1>
     <form>
     	<input type="text" id="id" placeholder="아이디" required="required" />
-        <input type="password" id="pw" placeholder="비밀번호" required="required" /><br/>
+        <input type="password" id="pw" onkeypress="if(event.keyCode==13) {Onlogin();}" placeholder="비밀번호" required="required" /><br/>
         <button type="button" class = "Signup" onclick="Onlogin()">로그인</button>
     </form>
 	 <a class="link" href="pw_check.html">비밀번호 찾기</a>
 	 <a class ="register" href ="register.html">회원가입</a>
 </div>
-<script type = "text/javascript">
-var localStorage = window.localStorage;
-var members = [];
-var cnt = -1;
-var members_db = JSON.parse(localStorage.getItem("members"));
-
-function Checklogin(){
-	var id = document.getElementById("id");
-	var pw = document.getElementById("pw");
-	var haveID = false;
-	var getLogin=false;
-	var isAdmin = false;
-	for(var i=0;i<members_db.length;i++){
-		if(members_db[i][0]==id.value){
-			haveID=true;
-			cnt = i;
-		}
-	}
-	if(!haveID){
-		alert("아이디를 확인해주세요");
-		return false;
-	}
-	else{
-		if(members_db[cnt][1]==pw.value){
-			getLogin = true;
-		}
-		else{
-			alert("비밀번호를 확인해주세요");
-			return false;
-		}
-	}
-	if(getLogin){
-		if(cnt==0){
-			isAdmin=true;
-		}
-	}
-	members_db[cnt][8] = isAdmin;
-	members_db[cnt][7] = haveID;
-	localStorage.setItem("members", JSON.stringify(members_db));
-	return getLogin;
-}
-function Onlogin(){
-	if(Checklogin()){
-		if(cnt==0){
-			alert("관리자로 로그인 되셨습니다");
-			window.location.replace("admin_page.html");
-		}
-		else{
-			alert("로그인 성공");
-			check_current_user();
-			window.location.replace("Main.html");
-		}
-	}
-	else{
-		alert("로그인 실패");
-	}
-}
-
-function check_current_user() {
-
-	for (var i=1; i<members_db.length; i++) {
-		if (members_db[i][7]==true) {
-			localStorage.setItem("current_user_id", i);
-			break;
-		}
-		else localStorage.setItem("current_user_id", "");
-	}
-}
-
-
-</script>
+<script type = "text/javascript" src="js/login.js"></script>
 </body>
 </html>

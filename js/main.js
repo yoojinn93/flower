@@ -8,11 +8,12 @@ localStorage.setItem("order", JSON.stringify(order));
 var items_db = JSON.parse(localStorage.getItem("items"));
 var order_db = JSON.parse(localStorage.getItem("order"));
 var members_db = JSON.parse(localStorage.getItem("members"));
+var current_user_id = JSON.parse(localStorage.getItem("current_user_id")); //장바구니 에러 해결 1단계.-동환
 ////default DB end////
 
 
 /// Indent 되어 있는 부분은 main.html에서 로컬스토리지 선언 부분을 빼고 모두 복사해온 것들입니다
-	var cart = new Array();
+	var cart = members_db[current_user_id][6];         //장바구니 에러 해결 2단계 cart를 현재 접속해있는 회원의 장바구니 array에 연결 -동환
 	var cnt = -1; //로그인 db 참조 변수
 	function loadInfo() {
 		for (var i =0; i < items_db.length; i++)
@@ -29,7 +30,7 @@ var members_db = JSON.parse(localStorage.getItem("members"));
 				td01.setAttribute("colspan", "2");
 				tr01.appendChild(td01);
 	
-				td01.innerHTML = '<img id="product_image" src = "' + items_db[i][3] +'" width="150px" height="150px">';
+				td01.innerHTML = '<img id="product_image" src = "' + items_db[i][3] +'" width="300px" height="300px">';
 	
 				var tr02 = document.createElement("tr");
 				document.getElementById("item_"+i).appendChild(tr02);
@@ -59,7 +60,7 @@ var members_db = JSON.parse(localStorage.getItem("members"));
 				td04.setAttribute("colspan", "2");
 				tr04.appendChild(td04);
 	
-				td04.innerHTML = '<p id="product_image">' + items_db[i][2] +' set</p>';
+				td04.innerHTML = '<p id="product_storage">남은 수량 | ' + items_db[i][2] +' set</p>';
 	
 				var tr05 = document.createElement("tr");
 				document.getElementById("item_"+i).appendChild(tr05);
@@ -76,32 +77,44 @@ var members_db = JSON.parse(localStorage.getItem("members"));
 			}
 	}
 	function add_cart(product_id){
+		
+	    if(members_db[current_user_id] == null || members_db[current_user_id] == undefined){
+	    	window.alert("로그인 후 이용 가능 합니다.");
+	    	return;
+	    }
 	    
 	    var product_quantity = parseInt(document.getElementById("product_quantity"+product_id).value);
-	    if(product_quantity>items_db[product_id][2]){
+	    if(items_db[product_id][2] == 0){
+	    	window.alert("매진된 상품입니다.");
+	    	return;
+	    }
+	    else if(product_quantity>items_db[product_id][2]){
 	        window.alert("한도 수량을 초과하셨습니다.");
 	        return;
 	    }
+	
 	    else{
 	    var case1 = true;
 	    var product = [product_id,product_quantity];
         	if(cart.length == 0){
                 cart.push(product);
                 case1 = false;
+                window.alert("["+items_db[product_id][0]+"] "+product_quantity+"개 추가되었습니다.");
             }
             else{
             	for(var i=0;i<cart.length;i++){
                 	if(cart[i][0] == product[0]){
                 	cart.splice(i,1,product);
                 	case1 = false;
+                	window.alert("["+items_db[product_id][0]+"] "+product_quantity+"개 변경되었습니다.");
                 	break;
                 	}
         		}
             }
             if(case1 == true){
                 cart.push(product);
+                window.alert("["+items_db[product_id][0]+"] "+product_quantity+"개 추가되었습니다.");
             }
-	    localStorage.setItem("cart",JSON.stringify(cart));//확인용 스토리지 추후 삭제.
 	    members_db[current_user_id][6] = cart;
         localStorage.setItem("members", JSON.stringify(members_db)); 
 	    }

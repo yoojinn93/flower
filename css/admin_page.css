@@ -1,0 +1,98 @@
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+* {
+	font-size: 16px;
+	font-family : 'Nanum Gothic', sans-serif;
+}
+
+#header{
+	position:relative;
+	margin: 0 0 0 0;
+	padding: 5px 5px 5px 5px;
+	border-bottom-color:#c3c3c3;
+	width: 100%;
+	margin-left: 230px;
+	height: 5%;
+	background-image: url(../img/Background_long.jpg);
+	background-position: center center;
+	background-repeat: no-repeat;
+	}
+#header a:hover{
+	color:#999;
+	}
+#header li{
+	list-style-position: inside;
+	list-style-type:none;
+	display: inline;
+	position: relative;
+	letter-spacing: 10px;
+	text-align: center;
+	font-size: 30px;
+	margin-right: 40px;
+	
+	}
+#header ul{
+		
+	}
+#article{
+	position: relative;
+	display:block;
+	margin: 30px 0 0 230px;
+	width: 100%;
+	height: 60%;
+	
+	}
+#aside{
+	position:relative;
+	margin: 30px 0 0 0;
+	width: 20%;
+	height: 60%;
+	float:left;
+	background-image: url(../img/Background_long.jpg);
+	background-position: center center;
+	background-repeat: no-repeat;
+	text-align: center;
+}
+	}
+#footer{
+	display: block;
+	position: relative;
+	margin-top: 30px;
+	margin-left: 30px;
+	text-align:center;
+	width: 100%;
+	background-color: black;
+	}
+ul{
+	display:inline;
+	
+	}
+.link{
+	text-decoration: none;
+	color: white;
+}
+.title{
+	float:left;
+	padding-top: 5px;
+	background-image: url(../img/Background_long.jpg);
+	background-position: center center;
+	background-repeat: no-repeat;
+	width: 20%;
+	height: 20%;
+	font-size: 30px;
+	text-align: center;
+}
+#log_in{
+	display:block;
+	position:relative;
+	width: 80%;
+	margin: 5px 5px 5px 5px;
+	border: thin solid black;
+}
+body{
+	margin: 5% 0 0 5%;
+	width: 1000px;
+	height: 1000px;
+}
+
+

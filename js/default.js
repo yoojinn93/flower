@@ -41,40 +41,41 @@ var members_db = JSON.parse(localStorage.getItem("members"));
 var items = [];
 
 items[0] = [];	
-	items[0][0] = "장미";
-	items[0][1] = "25000";
+	items[0][0] = "나만의 햇살장미";
+	items[0][1] = "39000";
 	items[0][2] = "20";
-	items[0][3] = "img/flower.jpg";
+	items[0][3] = "img/Flower_MyRose.jpg";
 
 items[1] = [];
-	items[1][0] = "수국";
-	items[1][1] = "15000";
+	items[1][0] = "러브 액츄얼리";
+	items[1][1] = "49000";
 	items[1][2] = "4";
-	items[1][3] = "img/soo.jpg";
+	items[1][3] = "img/Flower_LoveActually.jpg";
 
 items[2] = [];
-	items[2][0] = "수국2";
-	items[2][1] = "150000";
+	items[2][0] = "로맨틱 부다페스트";
+	items[2][1] = "39000";
 	items[2][2] = "4";
-	items[2][3] = "img/flower.jpg";
+	items[2][3] = "img/Flower_RomanticBudapest.jpg";
 
 items[3] = [];
-	items[3][0] = "크리스마스 로즈";
-	items[3][1] = "25000";
-	items[3][2] = "20";
-	items[3][3] = "img/rose.jpg";
+	items[3][0] = "정윤경 교수님의 미소";
+	items[3][1] = "51000";
+	items[3][2] = "17";
+	items[3][3] = "img/Flower_MyLittleAlice.jpg";
 
 items[4] = [];
-	items[4][0] = "장미쓰";
-	items[4][1] = "25000";
+	items[4][0] = "미드나잇 블루";
+	items[4][1] = "42000";
 	items[4][2] = "20";
-	items[4][3] = "img/flower.jpg";
+	items[4][3] = "img/Flower_MidnightBlue.jpg";
 
 items[5] = [];
-	items[5][0] = "빨간장미";
-	items[5][1] = "25000";
+	items[5][0] = "클림트의 키스";
+	items[5][1] = "49000";
 	items[5][2] = "20";
-	items[5][3] = "img/flower.jpg";
+	items[5][3] = "img/Flower_KissOfKlimt.jpg";
+
 
 
 localStorage.setItem("items", JSON.stringify(items));

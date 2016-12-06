@@ -1,0 +1,162 @@
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+* {
+	font-size: 15px;
+	font-family : 'Nanum Gothic', sans-serif;
+}
+
+#UpSide {
+	height: 230px;
+	width: 100%;
+	text-align: center;
+	margin-top : -10px;
+	background-color : #222;
+	background-image: url(../img/Background_small.jpg);
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+
+#DownSide {
+    width : 1200px;
+    margin-top: 50px;
+    margin-left: 50%;
+    transform : translateX(-50%);
+}
+
+a {
+	position : absolute;
+	left: 3%;
+	top: 3%;
+	width: 100px;
+	padding: 15px 0 15px 0;
+	color: #fff;
+	border: 1px solid #fff;
+	text-align: center;
+	outline: none;
+	text-decoration: none;
+	cursor : pointer;
+}
+
+a:hover {
+	background-color: white;
+	color: #222;
+	transition: background-color 1s, color 1s;
+}
+
+/*
+	각종 정렬 클래스
+*/
+.veralign_t {vertical-align: top;}
+.veralign_b {vertical-align: bottom;}
+.talign_r {text-align: right;}
+.talign_c {text-align:center;}
+
+/*
+	장바구니 진행 현황 나타내는 부분
+*/
+
+#head_wrap {border: solid 1px #777; background-color: #373839; color: white; overflow-y: auto;}
+
+.cart_process li {
+	list-style-type : none;
+	float: left;
+	vertical-align: middle;
+	text-align: center;
+	position: relative;
+    color: #AAA;
+	margin-right: 1.5em;
+}
+
+#process_wrap {float: right;}
+
+#process_now {color: white; font-weight: bolder;}
+
+h3 {
+	text-align: left;
+	float: left;
+	margin-left: 1.5em;
+}
+
+/*
+	장바구니 내 담긴 물품 출력하는 부분
+*/
+#list_caption {border: solid 1px #777; overflow-y: auto; line-height: 3.5em; font-size:0.8em; text-indent: 1em; display: block;}
+#list_wrap_table {border: solid 1px #777; overflow-y: auto; height: auto;}
+
+.product {font-size: 0.8em;}
+#product_remove {color: #555;}
+
+/*
+	최종 결제 금액 표시
+*/
+#price_caption {border: solid 1px #777; overflow-y: auto;}
+#price_caption p {font-size: 0.8em; text-align: right; margin-right: 10%;}
+#total_price {padding-left: 2em; font-size: 1.5em;}
+
+#cart_item_check {
+    padding-top: 70px;
+    padding-left : 15px;
+    float: left;
+}
+
+#cart_item {
+    overflow-y: auto;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-bottom : solid 1px #777;
+}
+
+#cart_item_photo {
+    width: 150px;
+    height: 150px;
+    background-size: 100% 100%;
+    vertical-align: middle;
+    margin-left: 10px;
+    float: left;
+}
+
+.cart_item_info {
+    margin-top : 40px;
+    margin-left : 10px;
+	vertical-align: top;
+	display: inline-block;
+}
+
+#list_total_price {
+    float: left;
+}
+
+#list_wrap_button {
+    float: right;
+}
+
+#flowerName {font-size: 1.2em;}
+#flowerPnQ {font-size: 0.8em;}
+#flowerLSum {color:deeppink; margin-top: -1em;}
+
+		
+.button {
+	width : 150px;
+	height : 3em;
+	color : white;
+	border : none;
+	cursor : pointer;
+}
+
+.order {
+	background-color : #1E90FF;
+}
+
+.order:hover {
+	background-color : #3EC0FF;
+	transition : background-color, 0.5s;
+}
+
+.calculate {
+	background-color : #373839;
+}
+
+.calculate:hover {
+	background-color : #575859;
+	transition : background-color, 0.5s;
+}

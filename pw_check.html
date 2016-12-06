@@ -3,70 +3,21 @@
 <head>
 	<title>비밀번호 찾기</title>
 	<meta charset="utf-8">
-	<style>
-		.login{
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			margin: -150px 0 0 -150px;
-			width:300px;
-			height:300px;
-		}
-		input{
-			width: 90%;
-			margin-left: 5px;
-			margin-bottom: 10px;
-			padding: 10px;
-			border: rgba(0,0,0,0.3) 1px solid;
-			border-radius: 4px;
-			outline: none;
-			font-size: 13px;
-			box-shadow: inset 0 -5px 45px rgba(100,100,100,0.2), 0 1px 1px rgba(255,255,255,0.2);
-			font-family: 'Batang';
-		}
-		h1{
-			text-align: center;
-			font-family: 'Batang che';
-		}
-		button{
-			margin: 5px 0 0 15px;
-			font-family: 'Malgun Gothic';
-		}
-	</style>
+	<link rel="stylesheet" type="text/css" href="css/pw_check.css">
 </head>
 
 <body>
+
+<div id="UpSide"></div>
+
 <div class="login">
 	<h1>비밀번호 찾기</h1>
     <form>
-    	<input type="text" id="id" placeholder="아이디를 입력해주세요" required="required"/><br/>
-        <button type="button" class = "Signup" onclick="CheckId()">비밀번호 찾기</button>
+    	<input type="text" id="id" onkeypress="if(event.keyCode==13) {CheckId();}" placeholder="아이디를 입력해주세요" required="required"/><br/>
+        <button type="button" class = "button check" onclick="CheckId()">비밀번호 찾기</button>
     </form>
 </div>
-<script type = "text/javascript">
-var localStorage = window.localStorage;
-var members_db = JSON.parse(localStorage.getItem("members"));
-
-function CheckId(){
-	var id = document.getElementById("id");
-	var IsID = false;
-	var cnt=-1;
-	for(var i=0;i<members_db.length;i++){
-		if(members_db[i][0]==id.value){
-			IsID=true;
-			cnt = i;
-		}
-	}
-	if(!IsID){
-		alert("존재하지 않는 회원입니다.");
-		window.location.replace("login.html")
-		return;
-	}
-	else{
-		alert(members_db[cnt][0]+"님의 비밀번호는"+members_db[cnt][1]+"입니다.");
-		window.location.replace("login.html")
-	}
-}
+<script type = "text/javascript" src = "js/pw_check.js">
 
 </script>
 </body>

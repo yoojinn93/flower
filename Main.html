@@ -4,77 +4,32 @@
 	<title>Main</title>
 	<meta charset="utf-8" http-equiv="refresh">
 
-	<style type="text/css">
-
-		* {
-			font-size: 12px;
-		}
-
-		#section_login {
-			float: left;
-			margin-bottom: 50px;
-		}
-
-		#section_products {
-			clear: left;
-		}
-
-		table {
-			float: left;
-			clear: none;
-			margin: 0 5px;
-			padding: 5px 0;
-			width: 150px;
-		}
-
-		.product {
-			line-height: 1px;
-			text-align: center;
-		}
-
-		#product_quantity {
-			width: 50px;
-		}
-
-		#section_addItem {
-			clear: left;
-		}
-		
-		a {
-			display: block;
-			text-decoration: none;
-		}
-
-	</style>
+	<link rel="stylesheet" type="text/css" href="css/Main.css">
 
 </head>
 <body onload='loadInfo();'>
 
-<div id="section_login">
+<div id="UpSide">
 
-	<form>
-		<table id = "areaLogin">
-			<tr>
-				<td colspan=2><button type = "button" id= "login" onclick="goLogin()">로그인</button></td>
-			</tr>
-		</table>
-		<table id = "areaLogout" style="display:none;">
-			<tr>
-            <td><div id="loginInfo"></div></td>
-        	</tr>
-        	<tr>
-        	<td><button type = "button" id= "logout" onclick="goLogout()">로그아웃</button></td>
-        	</tr>
-		</table>
-		<!--<input type="text" id="login_ID" placeholder="ID">
-		<br>
-		<input type="password" id="login_PW" placeholder="********">-->
-	</form>
+	<div id="section_login">
+		<form>
+			<section id = "areaLogin">
+				<a id= "login" onclick="goLogin();">로그인</a>
+			</section>
+			<section id = "areaLogout" style="display:none;">
+	        	<a id= "logout" onclick="goLogout();">로그아웃</a>
+			</section>
+		</form>
+
+		<div id="loginInfo"></div>
+	</div>
+	
+	<div id="section_etc">
+		<p id="myPage"><a href="MyPage.html">마이 페이지</a></p>
+		<p id="toCart"><a href="cart.html">장바구니</a></p>
+	</div>
+
 </div>
-
-<!--<button onclick="window.localStorage.clear();">스토리지 초기화 (새로고침하면 상품DB만 남아요)</button>-->
-<p id="myPage"><a href="MyPage.html">마이 페이지</a></p>
-<p id="toCart"><a href="cart.html">장바구니</a></p>
 
 <div id="section_products">
 
@@ -83,13 +38,8 @@
 
 </div>
 
-<!-- 관리자 모드에서 상품 추가 가능하므로 주석처리합니다 -제균
-<div id="section_addItem">
-	<a href="#"><button>상품 추가하기</button></a>
-</div>
--->
-
 <script type="text/javascript" src="js/main.js"></script>
 
 </body>
 </html>
+
